@@ -47,5 +47,6 @@ void QSOLogger::createActions()
     QAction *quitAct = new QAction(closeIcon, tr("&Quit"), this);
     quitAct->setShortcuts(QKeySequence::Quit);
     quitAct->setStatusTip(tr("Quit QSO Logger"));
+    connect(quitAct, &QAction::triggered, this, &QSOLogger::close);
     fileMenu->addAction(quitAct);
 }
