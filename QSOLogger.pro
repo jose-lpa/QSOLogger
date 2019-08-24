@@ -36,7 +36,8 @@ HEADERS += \
 RESOURCES = qsologger.qrc
 
 FORMS += \
-        qsologger.ui
+        qsologger.ui \
+        record.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
