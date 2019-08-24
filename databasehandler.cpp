@@ -1,3 +1,4 @@
+#include <QDateTime>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
@@ -17,18 +18,47 @@ DatabaseHandler::DatabaseHandler(const QString &dbname, QObject *parent)
     model->setTable("record");
     model->select();
     model->setHeaderData(0, Qt::Horizontal, tr("ID"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Time"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Call sign"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Band"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Frequency"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Mode"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Power"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Signal TX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Signal RX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Grid TX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Grid RX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Name"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Notes"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Time"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Call sign"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Band"));
+    model->setHeaderData(4, Qt::Horizontal, tr("Frequency"));
+    model->setHeaderData(5, Qt::Horizontal, tr("Mode"));
+    model->setHeaderData(6, Qt::Horizontal, tr("Power"));
+    model->setHeaderData(7, Qt::Horizontal, tr("Signal TX"));
+    model->setHeaderData(8, Qt::Horizontal, tr("Signal RX"));
+    model->setHeaderData(9, Qt::Horizontal, tr("Grid TX"));
+    model->setHeaderData(10, Qt::Horizontal, tr("Grid RX"));
+    model->setHeaderData(11, Qt::Horizontal, tr("Name"));
+    model->setHeaderData(12, Qt::Horizontal, tr("Notes"));
+
+    QSqlQuery query;
+
+    qint64 timestamp = QDateTime::currentSecsSinceEpoch();
+
+    query.prepare(
+        "INSERT INTO record ("
+        "timestamp, callsign, band, frequency, mode, power, signal_tx,"
+        "signal_rx, grid_tx, grid_rx, name, notes) "
+        "VALUES ("
+        ":timestamp, :callsign, :band, :frequency, :mode, :power, :signal_tx,"
+        ":signal_rx, :grid_tx, :grid_rx, :name, :notes)"
+    );
+    query.bindValue(":timestamp", timestamp);
+    query.bindValue(":callsign", "2E0IST");
+    query.bindValue(":band", "20m");
+    query.bindValue(":frequency", 14.234);
+    query.bindValue(":mode", "SSB");
+    query.bindValue(":power", 50);
+    query.bindValue(":signal_tx", 59);
+    query.bindValue(":signal_rx", 57);
+    query.bindValue(":grid_tx", "IO91jo");
+    query.bindValue(":grid_rx", "EL34is");
+    query.bindValue(":name", "Jerry");
+    query.bindValue(":notes", "Something curious about the contact.");
+
+    if (!query.exec())
+        qFatal("ERROR: Database query error. %s.",
+               query.lastError().text().toStdString().c_str());
 }
 
 bool DatabaseHandler::setUpTables(QString *error)

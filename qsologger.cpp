@@ -51,4 +51,5 @@ void QSOLogger::showQSOTable()
 
     QSqlTableModel *model = database->getModel();
     ui->tableView->setModel(model);
+    ui->tableView->show();
 }
