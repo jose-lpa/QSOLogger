@@ -17,12 +17,12 @@ public:
     ~DatabaseHandler();
 
     bool setUpTables(QString *error);
-    QSqlTableModel *getModel(QObject *parent = nullptr);
+    QSqlTableModel *getModel();
     //void insertRow(const QString &table, const QSqlRecord &record);
 
 private:
     QSqlDatabase db;
-    //QSqlTableModel *model;
+    QSqlTableModel *model;
 };
 
 #endif // DATABASEHANDLER_H

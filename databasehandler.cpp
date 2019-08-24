@@ -11,6 +11,24 @@ DatabaseHandler::DatabaseHandler(const QString &dbname, QObject *parent)
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(dbname);
     db.open();
+
+    model = new QSqlTableModel(parent, db);
+
+    model->setTable("record");
+    model->select();
+    model->setHeaderData(0, Qt::Horizontal, tr("ID"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Time"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Call sign"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Band"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Frequency"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Mode"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Power"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Signal TX"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Signal RX"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Grid TX"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Grid RX"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Name"));
+    model->setHeaderData(0, Qt::Horizontal, tr("Notes"));
 }
 
 bool DatabaseHandler::setUpTables(QString *error)
@@ -49,25 +67,7 @@ DatabaseHandler::~DatabaseHandler()
     db.close();
 }
 
-QSqlTableModel *DatabaseHandler::getModel(QObject *parent)
+QSqlTableModel *DatabaseHandler::getModel()
 {
-    QSqlTableModel *model = new QSqlTableModel(parent, db);
-
-    model->setTable("record");
-    model->select();
-    model->setHeaderData(0, Qt::Horizontal, tr("ID"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Time"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Call sign"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Band"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Frequency"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Mode"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Power"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Signal TX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Signal RX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Grid TX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Grid RX"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Name"));
-    model->setHeaderData(0, Qt::Horizontal, tr("Notes"));
-
     return model;
 }
