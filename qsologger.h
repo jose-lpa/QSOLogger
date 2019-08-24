@@ -2,7 +2,9 @@
 #define QSOLOGGER_H
 
 #include <QMainWindow>
-#include <QStandardItemModel>
+
+#include "databasehandler.h"
+
 
 namespace Ui {
     class QSOLogger;
@@ -16,12 +18,12 @@ public:
     explicit QSOLogger(QWidget *parent = nullptr);
     ~QSOLogger();
 
-    QStandardItemModel *model;
-
 private:
     Ui::QSOLogger *ui;
 
+    DatabaseHandler *database;
     void createActions();
+    void showQSOTable();
 };
 
 #endif // QSOLOGGER_H

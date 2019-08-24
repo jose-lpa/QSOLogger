@@ -1,29 +1,19 @@
 #include "qsologger.h"
 #include "ui_qsologger.h"
 
+#include<QDebug>
+
 QSOLogger::QSOLogger(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QSOLogger)
 {
     ui->setupUi(this);
 
+    // Draw the UI.
     createActions();
 
-    // Create new model.
-    model = new QStandardItemModel(4, 2, this);
-
-    // Attach the model to the view.
-    ui->tableView->setModel(model);
-
-    // Add (dummy) data to the table;
-    for (int row = 0; row < 4; row++)
-    {
-        for (int column = 0; column < 2; column++)
-        {
-            QModelIndex index = model->index(row, column, QModelIndex());
-            model->setData(index, "Testing");
-        }
-    }
+    // Render the QSOs table.
+    showQSOTable();
 }
 
 QSOLogger::~QSOLogger()
@@ -49,4 +39,16 @@ void QSOLogger::createActions()
     quitAct->setStatusTip(tr("Quit QSO Logger"));
     connect(quitAct, &QAction::triggered, this, &QSOLogger::close);
     fileMenu->addAction(quitAct);
+}
+
+void QSOLogger::showQSOTable()
+{
+    // Attach the model to the view and render it.
+    DatabaseHandler *database = new DatabaseHandler(QString("qso_logger"), this);
+    QString error;
+    database->setUpTables(&error);
+    qInfo() << "QSO table created successfully.";
+
+    QSqlTableModel *model = database->getModel();
+    ui->tableView->setModel(model);
 }
