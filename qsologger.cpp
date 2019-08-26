@@ -1,7 +1,7 @@
+#include "newrecord.h"
 #include "qsologger.h"
 #include "ui_qsologger.h"
 
-#include<QDebug>
 
 QSOLogger::QSOLogger(QWidget *parent) :
     QMainWindow(parent),
@@ -25,9 +25,16 @@ void QSOLogger::createActions()
 {
     QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
 
+    const QIcon newIcon = QIcon::fromTheme("document-new", QIcon(":/images/new.svg"));
+    QAction *newAct = new QAction(newIcon, tr("&New QSO"), this);
+    newAct->setShortcuts(QKeySequence::New);
+    newAct->setStatusTip(tr("Add new QSO"));
+    connect(newAct, &QAction::triggered, this, &QSOLogger::onNewQSOClicked);
+    fileMenu->addAction(newAct);
+
     const QIcon loadIcon = QIcon::fromTheme("document-open", QIcon(":/images/load_data.svg"));
     QAction *loadAct = new QAction(loadIcon, tr("&Load"), this);
-    loadAct->setShortcuts(QKeySequence::New);
+    loadAct->setShortcuts(QKeySequence::Open);
     loadAct->setStatusTip(tr("Load existent QSO data"));
     fileMenu->addAction(loadAct);
 
@@ -45,11 +52,15 @@ void QSOLogger::showQSOTable()
 {
     // Attach the model to the view and render it.
     DatabaseHandler *database = new DatabaseHandler(QString("qso_logger"), this);
-    QString error;
-    database->setUpTables(&error);
-    qInfo() << "QSO table created successfully.";
+    database->setUpTables();
 
     QSqlTableModel *model = database->getModel();
     ui->tableView->setModel(model);
     ui->tableView->show();
+}
+
+void QSOLogger::onNewQSOClicked()
+{
+    newRecord = new NewRecord();
+    newRecord->show();
 }

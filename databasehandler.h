@@ -16,7 +16,7 @@ public:
     DatabaseHandler(const QString &databaseName, QObject *parent = nullptr);
     ~DatabaseHandler();
 
-    bool setUpTables(QString *error);
+    void setUpTables();
     QSqlTableModel *getModel();
     //void insertRow(const QString &table, const QSqlRecord &record);
 

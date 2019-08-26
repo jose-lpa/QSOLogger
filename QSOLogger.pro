@@ -27,10 +27,12 @@ CONFIG += c++11
 SOURCES += \
         databasehandler.cpp \
         main.cpp \
+        newrecord.cpp \
         qsologger.cpp
 
 HEADERS += \
         databasehandler.h \
+        newrecord.h \
         qsologger.h
 
 RESOURCES = qsologger.qrc

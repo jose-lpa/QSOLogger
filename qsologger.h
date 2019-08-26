@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "databasehandler.h"
+#include "newrecord.h"
 
 
 namespace Ui {
@@ -18,10 +19,14 @@ public:
     explicit QSOLogger(QWidget *parent = nullptr);
     ~QSOLogger();
 
+public slots:
+    void onNewQSOClicked();
+
 private:
     Ui::QSOLogger *ui;
 
     DatabaseHandler *database;
+    NewRecord *newRecord;
     void createActions();
     void showQSOTable();
 };

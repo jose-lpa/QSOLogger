@@ -6,23 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>556</width>
-    <height>472</height>
+    <width>599</width>
+    <height>372</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Date/time</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+   <item row="6" column="4" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_3"/>
    </item>
    <item row="0" column="3">
     <widget class="QLabel" name="label_7">
@@ -31,48 +24,15 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="5">
-    <widget class="QLineEdit" name="lineEdit_5"/>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Call sign</string>
+   <item row="4" column="0" colspan="6">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit"/>
-   </item>
-   <item row="1" column="3">
-    <widget class="QLabel" name="label_10">
-     <property name="text">
-      <string>Name</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="5">
-    <widget class="QLineEdit" name="lineEdit_8"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Band</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QComboBox" name="comboBox"/>
-   </item>
-   <item row="2" column="3">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Frequency</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="4" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_2"/>
+   <item row="0" column="1" colspan="2">
+    <widget class="QDateTimeEdit" name="dateTimeEdit"/>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_11">
@@ -81,62 +41,21 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="QComboBox" name="comboBox_2"/>
+   <item row="9" column="0" colspan="2">
+    <widget class="QPlainTextEdit" name="plainTextEdit"/>
    </item>
-   <item row="4" column="0" colspan="6">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
+   <item row="1" column="5">
+    <widget class="QLineEdit" name="lineEdit_8"/>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_8">
+   <item row="2" column="3">
+    <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Signal TX</string>
+      <string>Frequency</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_6"/>
-   </item>
-   <item row="5" column="3">
-    <widget class="QLabel" name="label_9">
-     <property name="text">
-      <string>Signal RX</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="4" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_7"/>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Grid TX</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_4"/>
-   </item>
-   <item row="6" column="3">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Grid RX</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="4" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_3"/>
-   </item>
-   <item row="7" column="0" colspan="6">
-    <widget class="Line" name="line_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit"/>
    </item>
    <item row="8" column="0">
     <widget class="QLabel" name="label_12">
@@ -145,8 +64,156 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="0" rowspan="2" colspan="5">
-    <widget class="QPlainTextEdit" name="plainTextEdit"/>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Call sign</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="3">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>Signal RX</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Grid TX</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Band</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Grid RX</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="4" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_7"/>
+   </item>
+   <item row="5" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_6"/>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Signal TX</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="4" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_2"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Date/time</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QComboBox" name="comboBox_2">
+     <item>
+      <property name="text">
+       <string>CW</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>LSB</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>USB</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>FM</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="6" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_4"/>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="comboBox">
+     <item>
+      <property name="text">
+       <string>70cm</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>6m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>10m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>20m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>30m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>40m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>80m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>160m</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="5">
+    <widget class="QLineEdit" name="lineEdit_5"/>
+   </item>
+   <item row="7" column="0" colspan="6">
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </item>
    <item row="10" column="2" colspan="4">
     <widget class="QDialogButtonBox" name="buttonBox">

@@ -1,7 +1,7 @@
 #include <QDateTime>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QDebug>
+//#include <QDebug>
 
 #include "databasehandler.h"
 
@@ -31,37 +31,37 @@ DatabaseHandler::DatabaseHandler(const QString &dbname, QObject *parent)
     model->setHeaderData(11, Qt::Horizontal, tr("Name"));
     model->setHeaderData(12, Qt::Horizontal, tr("Notes"));
 
-    QSqlQuery query;
+//    QSqlQuery query;
 
-    qint64 timestamp = QDateTime::currentSecsSinceEpoch();
+//    qint64 timestamp = QDateTime::currentSecsSinceEpoch();
 
-    query.prepare(
-        "INSERT INTO record ("
-        "timestamp, callsign, band, frequency, mode, power, signal_tx,"
-        "signal_rx, grid_tx, grid_rx, name, notes) "
-        "VALUES ("
-        ":timestamp, :callsign, :band, :frequency, :mode, :power, :signal_tx,"
-        ":signal_rx, :grid_tx, :grid_rx, :name, :notes)"
-    );
-    query.bindValue(":timestamp", timestamp);
-    query.bindValue(":callsign", "2E0IST");
-    query.bindValue(":band", "20m");
-    query.bindValue(":frequency", 14.234);
-    query.bindValue(":mode", "SSB");
-    query.bindValue(":power", 50);
-    query.bindValue(":signal_tx", 59);
-    query.bindValue(":signal_rx", 57);
-    query.bindValue(":grid_tx", "IO91jo");
-    query.bindValue(":grid_rx", "EL34is");
-    query.bindValue(":name", "Jerry");
-    query.bindValue(":notes", "Something curious about the contact.");
+//    query.prepare(
+//        "INSERT INTO record ("
+//        "timestamp, callsign, band, frequency, mode, power, signal_tx,"
+//        "signal_rx, grid_tx, grid_rx, name, notes) "
+//        "VALUES ("
+//        ":timestamp, :callsign, :band, :frequency, :mode, :power, :signal_tx,"
+//        ":signal_rx, :grid_tx, :grid_rx, :name, :notes)"
+//    );
+//    query.bindValue(":timestamp", timestamp);
+//    query.bindValue(":callsign", "2E0IST");
+//    query.bindValue(":band", "20m");
+//    query.bindValue(":frequency", 14.234);
+//    query.bindValue(":mode", "SSB");
+//    query.bindValue(":power", 50);
+//    query.bindValue(":signal_tx", 59);
+//    query.bindValue(":signal_rx", 57);
+//    query.bindValue(":grid_tx", "IO91jo");
+//    query.bindValue(":grid_rx", "EL34is");
+//    query.bindValue(":name", "Jerry");
+//    query.bindValue(":notes", "Something curious about the contact.");
 
-    if (!query.exec())
-        qFatal("ERROR: Database query error. %s.",
-               query.lastError().text().toStdString().c_str());
+//    if (!query.exec())
+//        qFatal("ERROR: Database query error.%s.",
+//               query.lastError().text().toStdString().c_str());
 }
 
-bool DatabaseHandler::setUpTables(QString *error)
+void DatabaseHandler::setUpTables()
 {
     QSqlQuery query;
 
@@ -82,14 +82,9 @@ bool DatabaseHandler::setUpTables(QString *error)
         "notes TEXT)"
     );
 
-    if (result)
-        return true;
-    else {
-        if (error)
-            *error = query.lastError().text();
-
-        return false;
-    }
+    if (!result)
+        qFatal("ERROR: Can't set up database. %s.",
+               query.lastError().text().toStdString().c_str());
 }
 
 DatabaseHandler::~DatabaseHandler()

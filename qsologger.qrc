@@ -1,6 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>images/load_data.svg</file>
+    <file>images/new.svg</file>
     <file>images/quit.svg</file>
 </qresource>
 </RCC>
