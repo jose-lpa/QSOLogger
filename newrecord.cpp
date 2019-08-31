@@ -30,5 +30,5 @@ void NewRecord::on_buttonBox_accepted()
                   ui->signalRxEdit->text(),
                   ui->gridTxEdit->text(),
                   ui->gridRxEdit->text(),
-                  ui->notesEdit->placeholderText());
+                  ui->notesEdit->toPlainText());
 }
