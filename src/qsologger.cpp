@@ -57,6 +57,8 @@ void QSOLogger::showQSOTable()
 
     QSOModel *model = new QSOModel();
     ui->tableView->setModel(model);
+    ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableView->show();
 }
 
