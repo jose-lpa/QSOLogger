@@ -30,7 +30,7 @@ void QSOLogger::createActions()
     QAction *newAct = new QAction(newIcon, tr("&New QSO"), this);
     newAct->setShortcuts(QKeySequence::New);
     newAct->setStatusTip(tr("Add new QSO"));
-    connect(newAct, &QAction::triggered, this, &QSOLogger::onNewQSOClicked);
+    connect(newAct, &QAction::triggered, this, &QSOLogger::on_newQSO_clicked);
     fileMenu->addAction(newAct);
 
     const QIcon loadIcon = QIcon::fromTheme("document-open", QIcon(":/images/load_data.svg"));
@@ -62,7 +62,7 @@ void QSOLogger::showQSOTable()
     ui->tableView->show();
 }
 
-void QSOLogger::onNewQSOClicked()
+void QSOLogger::on_newQSO_clicked()
 {
     newRecord = new NewRecord();
     newRecord->show();

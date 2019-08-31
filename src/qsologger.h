@@ -20,7 +20,7 @@ public:
     ~QSOLogger();
 
 public slots:
-    void onNewQSOClicked();
+    void on_newQSO_clicked();
 
 private:
     Ui::QSOLogger *ui;
