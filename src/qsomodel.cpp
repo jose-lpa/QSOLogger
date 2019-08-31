@@ -32,6 +32,7 @@ void QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
             const QString &gridTx, const QString &gridRx,
             const QString &notes)
 {
+    // TODO: Move the `QSqlField` instantiations to constructor ^^^
     QSqlField dateTimeField("timestamp", QVariant::Int);
     dateTimeField.setValue(dateTime.currentSecsSinceEpoch());
 
@@ -83,6 +84,7 @@ void QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
     record.append(gridRxField);
     record.append(notesField);
 
+    // TODO: `emit` signal to update the table with new data after successful creation
     if (!insertRecord(-1, record))
     {
         QMessageBox errorMessage;

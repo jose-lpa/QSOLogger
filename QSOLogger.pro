@@ -25,23 +25,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        databasehandler.cpp \
-        main.cpp \
-        newrecord.cpp \
-        qsologger.cpp \
-        qsomodel.cpp
+        src/databasehandler.cpp \
+        src/main.cpp \
+        src/newrecord.cpp \
+        src/qsologger.cpp \
+        src/qsomodel.cpp
 
 HEADERS += \
-        databasehandler.h \
-        newrecord.h \
-        qsologger.h \
-        qsomodel.h
+        src/databasehandler.h \
+        src/newrecord.h \
+        src/qsologger.h \
+        src/qsomodel.h
 
 RESOURCES = qsologger.qrc
 
 FORMS += \
-        qsologger.ui \
-        record.ui
+        src/ui/qsologger.ui \
+        src/ui/record.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
