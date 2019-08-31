@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add new QSO</string>
   </property>
   <widget class="Line" name="line">
    <property name="geometry">

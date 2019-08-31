@@ -2,6 +2,7 @@
 #include "newrecord.h"
 #include "qsomodel.h"
 #include "ui_record.h"
+#include <QDebug>
 
 
 NewRecord::NewRecord(QWidget *parent) :
@@ -19,16 +20,19 @@ NewRecord::~NewRecord()
 void NewRecord::on_buttonBox_accepted()
 {
     QSOModel *model = new QSOModel();
-    model->addQSO(ui->dateTimeEdit->dateTime(),
-                  ui->callSignEdit->text(),
-                  ui->nameEdit->text(),
-                  ui->bandEdit->currentText(),
-                  ui->modeEdit->currentText(),
-                  ui->frequencyEdit->value(),
-                  ui->powerTxEdit->value(),
-                  ui->signalTxEdit->text(),
-                  ui->signalRxEdit->text(),
-                  ui->gridTxEdit->text(),
-                  ui->gridRxEdit->text(),
-                  ui->notesEdit->toPlainText());
+    bool created = model->addQSO(ui->dateTimeEdit->dateTime(),
+                                 ui->callSignEdit->text(),
+                                 ui->nameEdit->text(),
+                                 ui->bandEdit->currentText(),
+                                 ui->modeEdit->currentText(),
+                                 ui->frequencyEdit->value(),
+                                 ui->powerTxEdit->value(),
+                                 ui->signalTxEdit->text(),
+                                 ui->signalRxEdit->text(),
+                                 ui->gridTxEdit->text(),
+                                 ui->gridRxEdit->text(),
+                                 ui->notesEdit->toPlainText());
+
+    if (created)
+        emit qsoCreated();
 }

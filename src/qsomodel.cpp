@@ -25,7 +25,7 @@ QSOModel::QSOModel(QObject *parent)
     setHeaderData(12, Qt::Horizontal, tr("Notes"));
 }
 
-void QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
+bool QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
             const QString &name, const QString &band, const QString &mode,
             const double &frequency, const double &power,
             const QString &signalTx, const QString &signalRx,
@@ -33,7 +33,7 @@ void QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
             const QString &notes)
 {
     // TODO: Move the `QSqlField` instantiations to constructor ^^^
-    QSqlField dateTimeField("timestamp", QVariant::Int);
+    QSqlField dateTimeField("timestamp", QVariant::DateTime);
     dateTimeField.setValue(dateTime.currentSecsSinceEpoch());
 
     QSqlField callSignField("callsign", QVariant::String);
@@ -84,14 +84,15 @@ void QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
     record.append(gridRxField);
     record.append(notesField);
 
-    // TODO: `emit` signal to update the table with new data after successful creation
     if (!insertRecord(-1, record))
     {
         QMessageBox errorMessage;
         errorMessage.setWindowTitle(tr("QSO Logger error"));
-        errorMessage.setText(lastError().text());  // FIXME: no `lastError` here.
+        errorMessage.setText(tr("Database error: unable to store QSO."));
         errorMessage.setIcon(QMessageBox::Critical);
         errorMessage.exec();
+
+        return false;
     }
     else
     {
@@ -100,5 +101,7 @@ void QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
         successMessage.setText(tr("New QSO successfully created."));
         successMessage.setIcon(QMessageBox::Information);
         successMessage.exec();
+
+        return true;
     }
 }

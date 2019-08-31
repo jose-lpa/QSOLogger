@@ -12,7 +12,7 @@ class QSOModel : public QSqlTableModel
 
 public:
     QSOModel(QObject *parent = nullptr);
-    void addQSO(const QDateTime &dateTime, const QString &callSign,
+    bool addQSO(const QDateTime &dateTime, const QString &callSign,
                 const QString &name, const QString &band, const QString &mode,
                 const double &frequency, const double &power,
                 const QString &signalTx, const QString &signalRx,

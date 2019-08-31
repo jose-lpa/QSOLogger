@@ -18,6 +18,9 @@ public:
     explicit NewRecord(QWidget *parent = nullptr);
     virtual ~NewRecord();
 
+signals:
+    void qsoCreated();
+
 private slots:
     void on_buttonBox_accepted();
 

@@ -13,6 +13,10 @@ QSOLogger::QSOLogger(QWidget *parent) :
     // Draw the UI.
     createActions();
 
+    // Initialize the database.
+    DatabaseHandler *database = new DatabaseHandler(QString("qso_logger"), this);
+    database->setUpTables();
+
     // Render the QSOs table.
     showQSOTable();
 }
@@ -51,10 +55,6 @@ void QSOLogger::createActions()
 
 void QSOLogger::showQSOTable()
 {
-    // Attach the model to the view and render it.
-    DatabaseHandler *database = new DatabaseHandler(QString("qso_logger"), this);
-    database->setUpTables();
-
     QSOModel *model = new QSOModel();
     ui->tableView->setModel(model);
     ui->tableView->setColumnHidden(0, true);
@@ -66,4 +66,11 @@ void QSOLogger::on_newQSO_clicked()
 {
     newRecord = new NewRecord();
     newRecord->show();
+
+    connect(newRecord, &NewRecord::qsoCreated, this, &QSOLogger::on_qsoCreated);
+}
+
+void QSOLogger::on_qsoCreated()
+{
+    showQSOTable();
 }
