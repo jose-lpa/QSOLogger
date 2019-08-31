@@ -1,5 +1,6 @@
 #include "newrecord.h"
 #include "qsologger.h"
+#include "qsomodel.h"
 #include "ui_qsologger.h"
 
 
@@ -54,7 +55,7 @@ void QSOLogger::showQSOTable()
     DatabaseHandler *database = new DatabaseHandler(QString("qso_logger"), this);
     database->setUpTables();
 
-    QSqlTableModel *model = database->getModel();
+    QSOModel *model = new QSOModel();
     ui->tableView->setModel(model);
     ui->tableView->show();
 }

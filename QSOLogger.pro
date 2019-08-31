@@ -28,12 +28,14 @@ SOURCES += \
         databasehandler.cpp \
         main.cpp \
         newrecord.cpp \
-        qsologger.cpp
+        qsologger.cpp \
+        qsomodel.cpp
 
 HEADERS += \
         databasehandler.h \
         newrecord.h \
-        qsologger.h
+        qsologger.h \
+        qsomodel.h
 
 RESOURCES = qsologger.qrc
 

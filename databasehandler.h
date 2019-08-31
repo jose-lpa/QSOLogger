@@ -1,11 +1,11 @@
 #ifndef DATABASEHANDLER_H
 #define DATABASEHANDLER_H
 
+#include <QDateTime>
 #include <QObject>
 #include <QString>
 #include <QSqlDatabase>
 #include <QSqlTableModel>
-//#include <QSqlRecord>
 
 
 class DatabaseHandler : public QObject
@@ -17,12 +17,9 @@ public:
     ~DatabaseHandler();
 
     void setUpTables();
-    QSqlTableModel *getModel();
-    //void insertRow(const QString &table, const QSqlRecord &record);
 
 private:
     QSqlDatabase db;
-    QSqlTableModel *model;
 };
 
 #endif // DATABASEHANDLER_H
