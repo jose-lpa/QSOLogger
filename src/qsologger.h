@@ -22,6 +22,7 @@ public:
 public slots:
     void on_newQSO_clicked();
     void on_qsoCreated();
+    void about();
 
 private:
     Ui::QSOLogger *ui;

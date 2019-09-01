@@ -3,5 +3,6 @@
     <file>images/load_data.svg</file>
     <file>images/new.svg</file>
     <file>images/quit.svg</file>
+    <file>images/info.svg</file>
 </qresource>
 </RCC>
