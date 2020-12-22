@@ -5,11 +5,11 @@
 #include <QDebug>
 
 
-NewRecord::NewRecord(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Dialog)
+NewRecord::NewRecord(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+
+    ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
 }
 
 NewRecord::~NewRecord()
