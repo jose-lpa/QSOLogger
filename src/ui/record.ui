@@ -113,7 +113,11 @@
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="callSignEdit"/>
+     <widget class="QLineEdit" name="callSignEdit">
+      <property name="toolTip">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item row="1" column="2">
      <widget class="QLabel" name="nameLabel">
