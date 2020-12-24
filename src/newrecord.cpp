@@ -1,8 +1,9 @@
+#include <QPushButton>
+
 #include "databasehandler.h"
 #include "newrecord.h"
 #include "qsomodel.h"
 #include "ui_record.h"
-#include <QDebug>
 
 
 NewRecord::NewRecord(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
@@ -10,11 +11,25 @@ NewRecord::NewRecord(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
     ui->setupUi(this);
 
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    connect(ui->callSignEdit, &QLineEdit::textChanged, this,
+            &NewRecord::on_callSignEditFilled);
 }
 
 NewRecord::~NewRecord()
 {
     delete ui;
+}
+
+void NewRecord::on_callSignEditFilled()
+{
+    QString callSignEditValue = ui->callSignEdit->text();
+    if (!callSignEditValue.isEmpty() && callSignEditValue.length() > 2) {
+        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+    }
+    else {
+        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    }
 }
 
 void NewRecord::on_buttonBox_accepted()
