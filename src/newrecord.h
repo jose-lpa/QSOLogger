@@ -23,7 +23,7 @@ signals:
 
 private slots:
     void on_buttonBox_accepted();
-    void on_callSignEditFilled();
+    void on_callSignEdit_textChanged();
 
 private:
     Ui::Dialog *ui;

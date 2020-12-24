@@ -12,8 +12,6 @@ NewRecord::NewRecord(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
 
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-    connect(ui->callSignEdit, &QLineEdit::textChanged, this,
-            &NewRecord::on_callSignEditFilled);
 }
 
 NewRecord::~NewRecord()
@@ -21,7 +19,7 @@ NewRecord::~NewRecord()
     delete ui;
 }
 
-void NewRecord::on_callSignEditFilled()
+void NewRecord::on_callSignEdit_textChanged()
 {
     QString callSignEditValue = ui->callSignEdit->text();
     if (!callSignEditValue.isEmpty() && callSignEditValue.length() > 2) {
