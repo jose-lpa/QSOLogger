@@ -20,7 +20,7 @@ public:
     ~QSOLogger();
 
 public slots:
-    void on_newQSO_clicked();
+    void on_newActTriggered();
     void on_qsoCreated();
     void about();
 
