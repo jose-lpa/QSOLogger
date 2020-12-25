@@ -12,6 +12,7 @@ NewRecord::NewRecord(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
 
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    ui->callSignEdit->setInputMethodHints(Qt::ImhUppercaseOnly);
 
     setValidators();
 }
@@ -22,7 +23,7 @@ NewRecord::~NewRecord()
 }
 
 void NewRecord::setValidators() {
-    QRegExp regEx("^[A-Z0-9]{3,7}$");
+    QRegExp regEx("^[A-Za-z0-9]{3,7}$");
     QRegExpValidator *validator = new QRegExpValidator(regEx);
     ui->callSignEdit->setValidator(validator);
 }
@@ -30,6 +31,11 @@ void NewRecord::setValidators() {
 void NewRecord::on_callSignEdit_textChanged()
 {
     QString callSignEditValue = ui->callSignEdit->text();
+
+    // Always turn letters into uppercase.
+    ui->callSignEdit->setText(callSignEditValue.toUpper());
+
+    // Form can only be submitted if the call sign seems to be a valid one.
     if (!callSignEditValue.isEmpty() && callSignEditValue.length() > 2) {
         ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
