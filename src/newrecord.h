@@ -29,6 +29,8 @@ private:
     Ui::Dialog *ui;
 
     DatabaseHandler *database;
+
+    void setValidators();
 };
 
 #endif // NEWRECORD_H

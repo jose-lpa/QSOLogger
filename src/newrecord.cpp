@@ -12,11 +12,19 @@ NewRecord::NewRecord(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
 
     ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+
+    setValidators();
 }
 
 NewRecord::~NewRecord()
 {
     delete ui;
+}
+
+void NewRecord::setValidators() {
+    QRegExp regEx("^[A-Z0-9]{3,7}$");
+    QRegExpValidator *validator = new QRegExpValidator(regEx);
+    ui->callSignEdit->setValidator(validator);
 }
 
 void NewRecord::on_callSignEdit_textChanged()
