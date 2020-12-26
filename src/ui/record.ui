@@ -150,12 +150,32 @@
       </item>
       <item>
        <property name="text">
+        <string>4m</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>6m</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>10m</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>12m</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>15m</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>17m</string>
        </property>
       </item>
       <item>
@@ -171,6 +191,11 @@
       <item>
        <property name="text">
         <string>40m</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>60m</string>
        </property>
       </item>
       <item>
