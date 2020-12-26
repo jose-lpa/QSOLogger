@@ -23,9 +23,16 @@ NewRecord::~NewRecord()
 }
 
 void NewRecord::setValidators() {
-    QRegExp regEx("^[A-Za-z0-9]{3,7}$");
-    QRegExpValidator *validator = new QRegExpValidator(regEx);
-    ui->callSignEdit->setValidator(validator);
+    // Validate call sign input.
+    QRegExp callSignRegEx("^[A-Za-z0-9]{3,7}$");
+    QRegExpValidator *callSignValidator = new QRegExpValidator(callSignRegEx);
+    ui->callSignEdit->setValidator(callSignValidator);
+
+    // Validate grid locators input.
+    QRegExp gridRegEx("^[A-R]{2}[0-9]{2}[a-x]{2}[0-9]{2}$");
+    QRegExpValidator *gridTxValidator = new QRegExpValidator(gridRegEx);
+    ui->gridTxEdit->setValidator(gridTxValidator);
+    ui->gridRxEdit->setValidator(gridTxValidator);
 }
 
 void NewRecord::on_callSignEdit_textChanged()
