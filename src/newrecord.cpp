@@ -22,7 +22,8 @@ NewRecord::~NewRecord()
     delete ui;
 }
 
-void NewRecord::setValidators() {
+void NewRecord::setValidators()
+{
     // Validate call sign input.
     QRegExp callSignRegEx("^[A-Za-z0-9]{3,7}$");
     QRegExpValidator *callSignValidator = new QRegExpValidator(callSignRegEx);
@@ -49,6 +50,18 @@ void NewRecord::on_callSignEdit_textChanged()
     else {
         ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     }
+}
+
+void NewRecord::on_bandEdit_currentTextChanged(const QString &text)
+{
+    // Obtain the minimum and maximum frequency values for the given band.
+    Frequency frequency = bandFrequency.value(text);
+
+    // Modify the `frequencyEdit` widget to accommodate boundaries and default
+    // value to currently selected band.
+    ui->frequencyEdit->setMinimum(frequency.lowest);
+    ui->frequencyEdit->setMaximum(frequency.highest);
+    ui->frequencyEdit->setValue(frequency.lowest);
 }
 
 void NewRecord::on_buttonBox_accepted()
