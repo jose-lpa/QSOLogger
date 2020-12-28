@@ -5,8 +5,7 @@
 #include "qsomodel.h"
 
 
-QSOModel::QSOModel(QObject *parent)
-    : QSqlTableModel { parent }
+QSOModel::QSOModel(QObject *parent) : QSqlTableModel { parent }
 {
     setTable("record");
     select();
@@ -32,41 +31,17 @@ bool QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
             const QString &gridTx, const QString &gridRx,
             const QString &notes)
 {
-    // TODO: Move the `QSqlField` instantiations to constructor ^^^
-    QSqlField dateTimeField("timestamp", QVariant::DateTime);
     dateTimeField.setValue(dateTime.currentSecsSinceEpoch());
-
-    QSqlField callSignField("callsign", QVariant::String);
     callSignField.setValue(callSign);
-
-    QSqlField nameField("name", QVariant::String);
     nameField.setValue(name);
-
-    QSqlField bandField("band", QVariant::String);
     bandField.setValue(band);
-
-    QSqlField modeField("mode", QVariant::String);
     modeField.setValue(mode);
-
-    QSqlField frequencyField("frequency", QVariant::Double);
     frequencyField.setValue(frequency);
-
-    QSqlField powerField("power", QVariant::Double);
     powerField.setValue(power);
-
-    QSqlField signalTxField("signal_tx", QVariant::Int);
     signalTxField.setValue(signalTx);
-
-    QSqlField signalRxField("signal_rx", QVariant::Int);
     signalRxField.setValue(signalRx);
-
-    QSqlField gridTxField("grid_tx", QVariant::String);
     gridTxField.setValue(gridTx);
-
-    QSqlField gridRxField("grid_rx", QVariant::String);
     gridRxField.setValue(gridRx);
-
-    QSqlField notesField("notes", QVariant::String);
     notesField.setValue(notes);
 
     QSqlRecord record;
@@ -84,6 +59,7 @@ bool QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
     record.append(gridRxField);
     record.append(notesField);
 
+    // TODO: Move this functionality out of the model.
     if (!insertRecord(-1, record))
     {
         QMessageBox errorMessage;
