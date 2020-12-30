@@ -13,12 +13,16 @@ class QSOModel : public QSqlTableModel
 
 public:
     QSOModel(QObject *parent = nullptr);
-    bool addQSO(const QDateTime &dateTime, const QString &callSign,
+    void addQSO(const QDateTime &dateTime, const QString &callSign,
                 const QString &name, const QString &band, const QString &mode,
                 const double &frequency, const double &power,
                 const QString &signalTx, const QString &signalRx,
                 const QString &gridTx, const QString &gridRx,
                 const QString &notes);
+
+signals:
+    void qsoCreated();
+    void qsoCreationFailed();
 
 private:
     QSqlField dateTimeField = QSqlField("timestamp", QVariant::DateTime);

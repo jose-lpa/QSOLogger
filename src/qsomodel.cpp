@@ -24,7 +24,7 @@ QSOModel::QSOModel(QObject *parent) : QSqlTableModel { parent }
     setHeaderData(12, Qt::Horizontal, tr("Notes"));
 }
 
-bool QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
+void QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
             const QString &name, const QString &band, const QString &mode,
             const double &frequency, const double &power,
             const QString &signalTx, const QString &signalRx,
@@ -59,25 +59,17 @@ bool QSOModel::addQSO(const QDateTime &dateTime, const QString &callSign,
     record.append(gridRxField);
     record.append(notesField);
 
-    // TODO: Move this functionality out of the model.
     if (!insertRecord(-1, record))
     {
-        QMessageBox errorMessage;
-        errorMessage.setWindowTitle(tr("QSO Logger error"));
-        errorMessage.setText(tr("Database error: unable to store QSO."));
-        errorMessage.setIcon(QMessageBox::Critical);
-        errorMessage.exec();
-
-        return false;
+        emit qsoCreated();
     }
     else
     {
-        QMessageBox successMessage;
-        successMessage.setWindowTitle(tr("QSO Added"));
-        successMessage.setText(tr("New QSO successfully created."));
-        successMessage.setIcon(QMessageBox::Information);
-        successMessage.exec();
+        emit qsoCreationFailed();
 
-        return true;
+        if (lastError().isValid()) {
+            qCritical("Database error: %s",
+                      qUtf8Printable(lastError().databaseText().toUtf8()));
+        }
     }
 }

@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include "databasehandler.h"
+#include "qsomodel.h"
 
 
 namespace Ui {
@@ -24,16 +25,19 @@ public:
     virtual ~NewRecord();
 
 signals:
-    void qsoCreated();
+    void qsoCreatedSuccess();
 
 private slots:
     void on_buttonBox_accepted();
     void on_callSignEdit_textChanged();
     void on_bandEdit_currentTextChanged(const QString &text);
+    void on_qsoCreated();
+    void on_qsoCreationFailed();
 
 private:
     Ui::Dialog *ui;
     DatabaseHandler *database;
+    QSOModel *model;
 
     const QMap<QString, Frequency> bandFrequency {
         {QString("160m"), Frequency{1.810, 2.000}},

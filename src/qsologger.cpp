@@ -83,7 +83,7 @@ void QSOLogger::on_newActTriggered()
     newRecord = new NewRecord();
     newRecord->show();
 
-    connect(newRecord, &NewRecord::qsoCreated, this, &QSOLogger::on_qsoCreated);
+    connect(newRecord, &NewRecord::qsoCreatedSuccess, this, &QSOLogger::on_qsoCreated);
 }
 
 void QSOLogger::on_qsoCreated()

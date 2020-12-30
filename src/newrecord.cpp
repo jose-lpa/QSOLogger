@@ -1,8 +1,8 @@
+#include <QMessageBox>
 #include <QPushButton>
 
 #include "databasehandler.h"
 #include "newrecord.h"
-#include "qsomodel.h"
 #include "ui_record.h"
 
 
@@ -15,11 +15,17 @@ NewRecord::NewRecord(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog)
     ui->callSignEdit->setInputMethodHints(Qt::ImhUppercaseOnly);
 
     setValidators();
+
+    model = new QSOModel();
+
+    connect(model, &QSOModel::qsoCreated, this, &NewRecord::on_qsoCreated);
+    connect(model, &QSOModel::qsoCreationFailed, this, &NewRecord::on_qsoCreated);
 }
 
 NewRecord::~NewRecord()
 {
     delete ui;
+    delete model;
 }
 
 void NewRecord::setValidators()
@@ -66,20 +72,36 @@ void NewRecord::on_bandEdit_currentTextChanged(const QString &text)
 
 void NewRecord::on_buttonBox_accepted()
 {
-    QSOModel *model = new QSOModel();
-    bool created = model->addQSO(ui->dateTimeEdit->dateTime(),
-                                 ui->callSignEdit->text(),
-                                 ui->nameEdit->text(),
-                                 ui->bandEdit->currentText(),
-                                 ui->modeEdit->currentText(),
-                                 ui->frequencyEdit->value(),
-                                 ui->powerTxEdit->value(),
-                                 ui->signalTxEdit->text(),
-                                 ui->signalRxEdit->text(),
-                                 ui->gridTxEdit->text(),
-                                 ui->gridRxEdit->text(),
-                                 ui->notesEdit->toPlainText());
+    model->addQSO(ui->dateTimeEdit->dateTime(),
+                  ui->callSignEdit->text(),
+                  ui->nameEdit->text(),
+                  ui->bandEdit->currentText(),
+                  ui->modeEdit->currentText(),
+                  ui->frequencyEdit->value(),
+                  ui->powerTxEdit->value(),
+                  ui->signalTxEdit->text(),
+                  ui->signalRxEdit->text(),
+                  ui->gridTxEdit->text(),
+                  ui->gridRxEdit->text(),
+                  ui->notesEdit->toPlainText());
+}
 
-    if (created)
-        emit qsoCreated();
+void NewRecord::on_qsoCreated()
+{
+    QMessageBox successMessage;
+    successMessage.setWindowTitle(tr("QSO Added"));
+    successMessage.setText(tr("New QSO successfully created."));
+    successMessage.setIcon(QMessageBox::Information);
+    successMessage.exec();
+
+    emit qsoCreatedSuccess();
+}
+
+void NewRecord::on_qsoCreationFailed()
+{
+    QMessageBox errorMessage;
+    errorMessage.setWindowTitle(tr("QSO Logger error"));
+    errorMessage.setText(tr("Database error: unable to store QSO."));
+    errorMessage.setIcon(QMessageBox::Critical);
+    errorMessage.exec();
 }
