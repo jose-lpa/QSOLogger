@@ -75,6 +75,7 @@ void QSOLogger::showQSOTable()
     ui->tableView->setColumnHidden(0, true);
     ui->tableView->setItemDelegateForColumn(1, new DateTimeFormatDelegate());
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableView->resizeColumnsToContents();
     ui->tableView->show();
 }
 
