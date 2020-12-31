@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         src/databasehandler.cpp \
+        src/datetimeformatdelegate.cpp \
         src/main.cpp \
         src/newrecord.cpp \
         src/qsologger.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
 
 HEADERS += \
         src/databasehandler.h \
+        src/datetimeformatdelegate.h \
         src/newrecord.h \
         src/qsologger.h \
         src/qsomodel.h

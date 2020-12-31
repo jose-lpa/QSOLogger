@@ -1,5 +1,6 @@
 #include <QMessageBox>
 
+#include "datetimeformatdelegate.h"
 #include "newrecord.h"
 #include "qsologger.h"
 #include "qsomodel.h"
@@ -7,8 +8,7 @@
 
 
 QSOLogger::QSOLogger(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::QSOLogger)
+    QMainWindow(parent), ui(new Ui::QSOLogger)
 {
     ui->setupUi(this);
 
@@ -71,9 +71,9 @@ void QSOLogger::createActions()
 
 void QSOLogger::showQSOTable()
 {
-    QSOModel *model = new QSOModel();
-    ui->tableView->setModel(model);
+    ui->tableView->setModel(new QSOModel());
     ui->tableView->setColumnHidden(0, true);
+    ui->tableView->setItemDelegateForColumn(1, new DateTimeFormatDelegate());
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableView->show();
 }
